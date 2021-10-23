@@ -4,7 +4,10 @@ inventory = {"A":50, "B":30, "C":20, "D":15, "E":40}
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
-    skus = unicode string \n
+    good_price = int \n
+    count = int \n
+    offer_count = int \n
+    discount = int \n
     special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free
     """
     remainder = (count % offer_count) * good_price
@@ -16,7 +19,9 @@ def offer_calculation(good_price, count, offer_count, discount):
 def checkout(skus):
     """
     skus = unicode string \n
-    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free
+    NOTE: fos skus to be a valid input it must be uppercase and included in the inventory \n
+    inventory = {"A":50, "B":30, "C":20, "D":15, "E":40} \n
+    e.g. skus = "AABBCDE"
     """
     # If invalid input return -1
     # Check for correct naming or empty basket
@@ -79,3 +84,6 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
+print(checkout(""))
+
