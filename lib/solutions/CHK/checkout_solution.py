@@ -9,14 +9,12 @@ offers_file_path = os.path.join(dir_path, "offers.json")
 
 with open(inventory_file_path) as f:
     inventory = json.load(f)
-print(inventory)
+
 with open(offers_file_path) as f:
     offers = json.load(f)
-#print(offers)
 
 for offer in offers:
     print(offer)
-
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
@@ -33,6 +31,10 @@ def offer_calculation(good_price, count, offer_count, discount):
     return offer_value
 
 def offer_handler(basket_skus):
+    """
+    OFFER HANDLER \n
+    basket_skus = unicode string \n
+    """
     total_basket_value=0
 
     basket = Counter(basket_skus)
@@ -46,14 +48,36 @@ def offer_handler(basket_skus):
         # check for any offers available
         item_offers = [c["offers"] for c in offers if c["product"]==item]
         if item_offers:
-            print(item_offers[0])
+            #print(item_offers[0])
             offer_type = [c["type"] for c in offers if c["product"]==item][0]
-            print(offer_type)
+            #print(offer_type)
+            if offer_type=="discount":
+                #if len(item_offers)>1:
+                # 5A for 200
+                offer_mod = cnt%5
+                # if remainder less than 3 use just 5A for 200
+                if offer_mod < 3:
+                    special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=5, discount=200)
+                    total_basket_value+=special_offer_value
+                # if remainder more than 3 use both  5A for 200 and 3A for 130
+                elif offer_mod >= 3:
+                    # 5A for 200
+                    special_offer_value = offer_calculation(good_price=item_price, count=cnt-offer_mod, offer_count=5, discount=200)
+                    total_basket_value+=special_offer_value
+                    # 3A for 130
+                    special_offer_value = offer_calculation(good_price=item_price, count=offer_mod, offer_count=3, discount=130)
+                    total_basket_value+=special_offer_value
+
+                # 3A for 130
+                else:
+                    special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=3, discount=130)
+                    total_basket_value+=special_offer_value
+
         else:
             total_basket_value+=(item_price*cnt)
 
-
-    return total_basket_value
+    print("New func: ", int(total_basket_value))
+    return int(total_basket_value)
 
 
 def checkout(skus):
@@ -76,7 +100,6 @@ def checkout(skus):
     total_basket_value=0
     # Count items in basket
     basket = Counter(skus)
-    print(basket)
     for item, cnt in basket.items():
         # Get price
         item_price = inventory.get(item, -1)
@@ -146,4 +169,5 @@ def checkout(skus):
     
 if __name__ == "__main__":
     print(checkout(skus="AAA"))
+
 
