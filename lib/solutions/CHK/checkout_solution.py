@@ -88,10 +88,9 @@ def checkout(skus):
 
                 # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
                 if free_bs<count_b:
-
-
-
-            
+                    new_b = count_b - free_bs
+                    new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=2, discount=45)
+                    total_basket_value+=new_cost_b
 
         else:
             total_basket_value+=(item_price*cnt)
@@ -100,3 +99,4 @@ def checkout(skus):
     
 
 print(checkout("AAAAA AABB"))
+
