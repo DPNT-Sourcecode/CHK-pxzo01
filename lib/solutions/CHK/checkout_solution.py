@@ -43,35 +43,19 @@ def checkout(skus):
             return -1
             
         ### Update total basket value
-
         # Special offers calculation
         if item == "A" and cnt>=3:
             # 5A for 200
             if cnt>=5:
-                remainder = (cnt % 5) * item_price
-                special_cnt = (cnt - (cnt % 5)) / 5
-
-                special_offer_value = (special_cnt*200) + remainder
+                special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=5, discount=200)
                 total_basket_value+=special_offer_value
             # 3A for 130
             else:
-                # remainder = (cnt % 3) * item_price
-                # special_cnt = (cnt - (cnt % 3)) / 3
-
-                # special_offer_value = (special_cnt*130) + remainder
-                # total_basket_value+=special_offer_value
-
                 special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=3, discount=130)
                 total_basket_value+=special_offer_value
 
         # 2B for 45
         elif item == "B" and cnt>=2:
-            # remainder = (cnt % 2) * item_price
-            # special_cnt = (cnt - (cnt % 2)) / 2
-
-            # special_offer_value = (special_cnt*45) + remainder
-            # total_basket_value+=special_offer_value
-
             special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=45)
             total_basket_value+=special_offer_value
 
@@ -89,6 +73,4 @@ def checkout(skus):
     return int(total_basket_value)
     
 
-print(checkout("BB"))
-
-
+print(checkout("AAAAABBB"))
