@@ -7,14 +7,15 @@ def checkout(skus):
     skus = unicode string \n
     special offers: 3A for 130, 2B for 45 
     """
-    if not skus.isalpha():
-        return -1
-    else:
-        basket = Counter(skus.upper())
-        
+    basket = Counter(skus.upper())
+
+    for item in basket:
+        print(item)
+
     return basket
 
 
 print(checkout("abcfev"))
     
+
 
