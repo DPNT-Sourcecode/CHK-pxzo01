@@ -7,7 +7,6 @@ def checkout(skus):
     skus = unicode string \n
     special offers: 3A for 130, 2B for 45 
     """
-
     total_basket_value=0
     # Count items in basket
     basket = Counter(skus.upper())
@@ -22,13 +21,15 @@ def checkout(skus):
         if item == "A" and cnt>=3:
             remainder = (cnt % 3) * item_price
             special_cnt = (cnt - (cnt % 3)) / 3
-            special_offer_value = special_cnt * 130 + remainder
+
+            special_offer_value = (special_cnt*130) + remainder
             total_basket_value+=special_offer_value
 
         elif item == "B" and cnt>=2:
             remainder = (cnt % 2) * item_price
             special_cnt = (cnt - (cnt % 2)) / 2
-            special_offer_value = special_cnt * 45 + remainder
+
+            special_offer_value = (special_cnt*45) + remainder
             total_basket_value+=special_offer_value
 
         else:
@@ -36,8 +37,6 @@ def checkout(skus):
         
         
     return int(total_basket_value)
-
-
-print(checkout("aaaa"))
     
+
 
