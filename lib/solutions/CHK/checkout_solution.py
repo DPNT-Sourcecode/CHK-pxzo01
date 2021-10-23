@@ -9,7 +9,7 @@ def offer_calculation(good_price, count, offer_count, discount):
     count = int \n
     offer_count = int \n
     discount = int \n
-    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free
+    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free, 2F get one F free
     """
     remainder = (count % offer_count) * good_price
     special_cnt = (count - (count % offer_count)) / offer_count
@@ -92,11 +92,19 @@ def checkout(skus):
                     new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=2, discount=45)
                     total_basket_value+=new_cost_b
 
+        # 2F get one F free
+        elif item == "F" and cnt>=3:
+            special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=20)
+            total_basket_value+=special_offer_value
+        
         else:
             total_basket_value+=(item_price*cnt)
 
     return int(total_basket_value)
     
+
+
+print(checkout("FFF"))
 
 
 
