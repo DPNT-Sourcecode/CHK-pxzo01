@@ -105,6 +105,8 @@ def checkout(skus):
     
 
 print(checkout("ABCD E C B AAB CA BB AAA EE AA"))
-print(checkout("AE FFFF"))
+print(checkout("AAA AAA AAA"))
+print(checkout("BBBBB EEE"))
+
 
 
