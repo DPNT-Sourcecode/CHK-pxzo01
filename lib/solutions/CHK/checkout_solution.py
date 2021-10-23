@@ -21,7 +21,7 @@ def checkout(skus):
     """
     skus = unicode string \n
     NOTE: fos skus to be a valid input it must be uppercase and included in the inventory \n
-    inventory = {"A":50, "B":30, "C":20, "D":15, "E":40} \n
+    inventory = {"A":50, "B":30, "C":20, "D":15, "E":40, "F":10} \n
     e.g. skus = "AABBCDE"
     """
     # If invalid input return -1
@@ -102,6 +102,3 @@ def checkout(skus):
 
     return int(total_basket_value)
     
-
-
-print(checkout("FFFFF"))
