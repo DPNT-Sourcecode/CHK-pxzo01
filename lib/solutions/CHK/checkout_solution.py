@@ -1,7 +1,7 @@
 from collections import Counter
 import math
 
-inventory = {"A":50, "B":30, "C":20, "D":15, "E":40}
+inventory = {"A":50, "B":30, "C":20, "D":15, "E":40, "F":10}
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
@@ -97,6 +97,7 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
 
 
 
