@@ -12,6 +12,3 @@ from solutions.CHK import checkout_solution
 
 def test_calculation(skus, total):
     assert checkout_solution.checkout(skus) == total
-
-
-

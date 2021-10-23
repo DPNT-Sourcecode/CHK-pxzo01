@@ -9,10 +9,10 @@ def checkout(skus):
     """
     # If invalid input return -1
     # Check for correct naming or empty basket
+    if not skus:
+        return 0
     if not skus.isupper():
         return -1
-    elif not skus:
-        return 0
 
     total_basket_value=0
     # Count items in basket
@@ -46,5 +46,3 @@ def checkout(skus):
 
     return int(total_basket_value)
     
-
-
