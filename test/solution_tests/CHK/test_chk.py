@@ -6,7 +6,8 @@ from solutions.CHK import checkout_solution
     ("BB" , 45),
     ("BBBEEEE", 190),
     ("BB EEEEE AAAAA AAA",530),
-    ("FFFF", 20),
+    ("FFFF", 30),
+    ("FFFFFF", 40),
     ("", 0),
     (" ", 0),
     ("%$£", -1),
@@ -16,4 +17,5 @@ from solutions.CHK import checkout_solution
 
 def test_calculation(skus, total):
     assert checkout_solution.checkout(skus) == total
+
 
