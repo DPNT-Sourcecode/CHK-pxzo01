@@ -103,5 +103,5 @@ def checkout(skus):
     return int(total_basket_value)
     
 
-print(checkout("FFFF"))
+print(checkout("FFFFAABBEE"))
 
