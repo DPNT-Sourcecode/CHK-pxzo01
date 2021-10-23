@@ -5,7 +5,7 @@ inventory = {"A":50, "B":30, "C":20, "D":15}
 def checkout(skus):
     """
     skus = unicode string \n
-    special offers: 3A for 130, 2B for 45 
+    special offers: 3A for 130, 2B for 45
     """
     total_basket_value=0
     # Count items in basket
@@ -38,5 +38,7 @@ def checkout(skus):
         
     return int(total_basket_value)
     
+
+#print(checkout("aabbcdd12"))
 
 
