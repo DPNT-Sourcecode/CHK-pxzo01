@@ -1,7 +1,13 @@
 from collections import Counter
 import math
+import json
 
-import inventory
+
+json_file_path = "inventory.json"
+with open(json_file_path) as f:
+    data = json.load(f)
+
+print(data)
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
@@ -103,3 +109,4 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
