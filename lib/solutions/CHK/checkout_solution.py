@@ -130,4 +130,4 @@ def checkout(skus):
     return int(total_basket_value)
     
 if __name__ == "__main__":
-    checkout(skus="AAA")
+    print(checkout(skus="AAA"))
