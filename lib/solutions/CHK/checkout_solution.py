@@ -9,19 +9,35 @@ def checkout(skus):
     """
 
     total_basket_value=0
+    # Count items in basket
     basket = Counter(skus.upper())
 
     for item, cnt in basket.items():
+        # if item not in invenory return -1
         item_price = inventory.get(item, -1)
-
         if item_price==-1:
             cnt=1
-        total_basket_value+=(item_price*cnt)
+        # update total basket value
+        # add special offers calculation
+        if item == "A" and cnt>=3:
+            remainder = (cnt % 3) * item_price
+            special_cnt = (cnt - (cnt % 3)) / 3
+            special_offer_value = special_cnt * 130 + remainder
+            total_basket_value+=special_offer_value
+
+        elif item == "B" and cnt>=2:
+            remainder = (cnt % 2) * item_price
+            special_cnt = (cnt - (cnt % 2)) / 2
+            special_offer_value = special_cnt * 45 + remainder
+            total_basket_value+=special_offer_value
+
+        else:
+            total_basket_value+=(item_price*cnt)
         
         
+    return int(total_basket_value)
 
-    return total_basket_value
 
-
-print(checkout("aac567"))
+print(checkout("aaaa"))
     
+
