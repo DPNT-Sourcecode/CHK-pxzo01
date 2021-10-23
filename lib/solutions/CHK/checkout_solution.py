@@ -45,34 +45,41 @@ def offer_handler(basket_skus):
         if item_price==-1:
             return -1
         # check for any offers available
-        item_offers = [c["offers"] for c in offers if c["product"]==item][0]
+        item_offers = [c["offers"] for c in offers if c["product"]==item]
         if item_offers:
             #print(item_offers[0])
             offer_type = [c["type"] for c in offers if c["product"]==item][0]
             print(item_offers)
-            offer_quantities = [q["quantity"] for q in item_offers]
+            offer_quantities = [q["quantity"] for q in item_offers[0]]
+            offer_prices = [q["price"] for q in item_offers[0]]
             print(offer_quantities)
-            if offer_type=="discount":
-                #if len(item_offers)>1:
-                # 5A for 200
-                offer_mod = cnt%5
-                # if remainder less than 3 use just 5A for 200
-                if offer_mod < 3:
-                    special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=5, discount=200)
-                    total_basket_value+=special_offer_value
-                # if remainder more than 3 use both  5A for 200 and 3A for 130
-                elif offer_mod >= 3:
-                    # 5A for 200
-                    special_offer_value = offer_calculation(good_price=item_price, count=cnt-offer_mod, offer_count=5, discount=200)
-                    total_basket_value+=special_offer_value
-                    # 3A for 130
-                    special_offer_value = offer_calculation(good_price=item_price, count=offer_mod, offer_count=3, discount=130)
-                    total_basket_value+=special_offer_value
+            print(offer_prices)
+            max_qt = max(offer_quantities)
+            min_qt = min(offer_quantities)
+            max_price = max(offer_prices)
+            min_price = min(offer_prices)
 
-                # 3A for 130
-                else:
-                    special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=3, discount=130)
-                    total_basket_value+=special_offer_value
+            if offer_type=="discount":
+                if len(item_offers)>1:
+                    # 5A for 200
+                    offer_mod = cnt%max_qt
+                    # if remainder less than 3 use just 5A for 200
+                    if offer_mod < min_qt:
+                        special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=max_qt, discount=max_price)
+                        total_basket_value+=special_offer_value
+                    # if remainder more than 3 use both  5A for 200 and 3A for 130
+                    elif offer_mod >= min_qt:
+                        # 5A for 200
+                        special_offer_value = offer_calculation(good_price=item_price, count=cnt-offer_mod, offer_count=max_qt, discount=max_price)
+                        total_basket_value+=special_offer_value
+                        # 3A for 130
+                        special_offer_value = offer_calculation(good_price=item_price, count=offer_mod, offer_count=min_qt, discount=min_price)
+                        total_basket_value+=special_offer_value
+
+                    # 3A for 130
+                    else:
+                        special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=min_price, discount=min_price)
+                        total_basket_value+=special_offer_value
 
         else:
             total_basket_value+=(item_price*cnt)
