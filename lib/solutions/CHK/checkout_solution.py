@@ -37,6 +37,17 @@ def offer_handler(basket_skus):
 
     basket = Counter(basket_skus)
     print(basket)
+    for item, cnt in basket.items():
+        # Get price
+        item_price = inventory.get(item, -1)
+        # check if good is in inventory, else return -1 just in case
+        if item_price==-1:
+            return -1
+        # check for any offers available
+        item_offers = [c["offers"] for offer in offers if offer["product"]==item]
+
+        print(item_offers)
+
 
     return total_basket_value
 
@@ -131,3 +142,4 @@ def checkout(skus):
     
 if __name__ == "__main__":
     print(checkout(skus="AAA"))
+
