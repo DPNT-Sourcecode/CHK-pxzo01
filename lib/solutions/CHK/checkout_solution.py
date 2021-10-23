@@ -1,7 +1,7 @@
 from collections import Counter
 import math
 
-inventory = {"A":50, "B":30, "C":20, "D":15, "E":40, "F":10}
+import inventory
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
