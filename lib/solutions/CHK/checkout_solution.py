@@ -11,18 +11,17 @@ def checkout(skus):
     total_basket_value=0
     basket = Counter(skus.upper())
 
-
     for item, cnt in basket.items():
         item_price = inventory.get(item, -1)
-        print(item, ":", cnt)
-        total_basket_value+=item_price
+
+        if item_price==-1:
+            cnt=1
+        total_basket_value+=(item_price*cnt)
+        
         
 
     return total_basket_value
 
 
-print(checkout("abcfev"))
+print(checkout("aac567"))
     
-
-
-
