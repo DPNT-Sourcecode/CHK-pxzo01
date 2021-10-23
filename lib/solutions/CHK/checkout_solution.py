@@ -99,11 +99,13 @@ def offer_handler(basket_skus):
                         count_b = basket[free_item]
                         price_b = inventory[free_item]
                         # Find offer for free item
-                        free_item_offer = [c["offers"] for c in offers if c["product"]==item]
-                        print("Free Item offer: " , free_item_offer)
-                        # Subtract initial B total cost and recalculate based on free_bs
-                        initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=2, discount=45)
-                        total_basket_value-=initial_cost_b
+                        free_item_offers = [c["offers"] for c in offers if c["product"]==item]
+                        if free_item_offers:
+                            for offer in free_item_offers[0]:
+                                print("Free Item offers: " , offer)
+                                # Subtract initial B total cost and recalculate based on free_bs
+                                initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=2, discount=45)
+                                total_basket_value-=initial_cost_b
 
                         # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
                         if free_bs<count_b:
@@ -208,5 +210,5 @@ def checkout(skus):
     return int(total_basket_value)
     
 if __name__ == "__main__":
-    print(checkout(skus="AAABBCCCBFF"))
+    print(checkout(skus="AAABBCCCBEE"))
 
