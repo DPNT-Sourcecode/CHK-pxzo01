@@ -60,6 +60,7 @@ def offer_handler(basket_skus):
             min_price = min(offer_prices)
 
             if offer_type=="discount":
+                print(len(item_offers[0]))
                 if len(item_offers[0])>1:
                     # Check remainder for multiple offers
                     offer_qts = cnt%max_qt
@@ -179,4 +180,5 @@ def checkout(skus):
     
 if __name__ == "__main__":
     print(checkout(skus="AAABB"))
+
 
