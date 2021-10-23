@@ -7,15 +7,21 @@ def checkout(skus):
     skus = unicode string \n
     special offers: 3A for 130, 2B for 45
     """
+    # If invalid input return -1
+    # Check for correct naming
+    if not skus.isupper():
+        return -1
+
     total_basket_value=0
     # Count items in basket
-    basket = Counter(skus.upper())
+    basket = Counter(skus)
 
     for item, cnt in basket.items():
-        # if item not in invenory return -1
+        # Get price
         item_price = inventory.get(item, -1)
+        # check if good is in inventory, else return -1
         if item_price==-1:
-            cnt=1
+            return -1
             
         ### Update total basket value
         # add special offers calculation
@@ -38,3 +44,4 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
