@@ -1,11 +1,22 @@
 from collections import Counter
 
-inventory = {"A":50, "B":30, "C":20, "D":15}
+inventory = {"A":50, "B":30, "C":20, "D":15, "E":40}
+
+def offer_calculation(good_price, count, offer_count, discount):
+    """
+    skus = unicode string \n
+    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free
+    """
+    remainder = (count % offer_count) * good_price
+    special_cnt = (count - (count % offer_count)) / offer_count
+    offer_value = (special_cnt*discount) + remainder
+
+    return offer_value
 
 def checkout(skus):
     """
     skus = unicode string \n
-    special offers: 3A for 130, 2B for 45
+    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free
     """
     # If invalid input return -1
     # Check for correct naming or empty basket
@@ -26,19 +37,41 @@ def checkout(skus):
             return -1
             
         ### Update total basket value
-        # add special offers calculation
+
+        # Special offers calculation
         if item == "A" and cnt>=3:
-            remainder = (cnt % 3) * item_price
-            special_cnt = (cnt - (cnt % 3)) / 3
+            # 5A for 200
+            if cnt>=5:
+                remainder = (cnt % 5) * item_price
+                special_cnt = (cnt - (cnt % 5)) / 5
 
-            special_offer_value = (special_cnt*130) + remainder
-            total_basket_value+=special_offer_value
+                special_offer_value = (special_cnt*200) + remainder
+                total_basket_value+=special_offer_value
+            # 3A for 130
+            else:
+                # remainder = (cnt % 3) * item_price
+                # special_cnt = (cnt - (cnt % 3)) / 3
 
+                # special_offer_value = (special_cnt*130) + remainder
+                # total_basket_value+=special_offer_value
+
+                special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=3, discount=130)
+                total_basket_value+=special_offer_value
+
+        # 2B for 45
         elif item == "B" and cnt>=2:
             remainder = (cnt % 2) * item_price
             special_cnt = (cnt - (cnt % 2)) / 2
 
             special_offer_value = (special_cnt*45) + remainder
+            total_basket_value+=special_offer_value
+
+        # 2E get one B free
+        elif item == "E" and cnt>=2:
+            remainder = (cnt % 2) * item_price
+            special_cnt = (cnt - (cnt % 2)) / 2
+
+            special_offer_value = (special_cnt*-30) + remainder
             total_basket_value+=special_offer_value
 
         else:
