@@ -48,22 +48,16 @@ def offer_handler(basket_skus):
         item_offers = [c["offers"] for c in offers if c["product"]==item]
         
         if item_offers:
-            #print(item_offers[0])
             offer_type = [c["type"] for c in offers if c["product"]==item][0]
-            print(offer_type)
-            print(item_offers)
             offer_quantities = [q["quantity"] for q in item_offers[0]]
             offer_prices = [q["price"] for q in item_offers[0]]
-            print(offer_quantities)
-            print(offer_prices)
+
             max_qt = max(offer_quantities)
             min_qt = min(offer_quantities)
             max_price = max(offer_prices)
             min_price = min(offer_prices)
 
             if offer_type=="discount":
-                print(len(item_offers[0]))
-                print(min_price, )
                 if len(item_offers[0])>1:
                     # Check remainder for multiple offers
                     offer_qts = cnt%max_qt
@@ -90,7 +84,7 @@ def offer_handler(basket_skus):
             elif offer_type=="free":
                 free_item = min_price
                 if item!=free_item:
-                    # Add first total cost of E
+                    # Add first total cost of Product
                     total_basket_value+=(inventory[item]*cnt)
                     # Check if B exists just to avoid ZeroDivision Errors
                     if basket[free_item]:
@@ -118,7 +112,6 @@ def offer_handler(basket_skus):
         else:
             total_basket_value+=(item_price*cnt)
 
-    print("New func: ", int(total_basket_value))
     return int(total_basket_value)
 
 
@@ -137,81 +130,13 @@ def checkout(skus):
     if not skus.isupper():
         return -1
 
-
     total_basket_value=offer_handler(basket_skus=skus)
-    """
-    total_basket_value=0
-    # Count items in basket
-    basket = Counter(skus)
-    for item, cnt in basket.items():
-        # Get price
-        item_price = inventory.get(item, -1)
-        # check if good is in inventory, else return -1 just in case
-        if item_price==-1:
-            return -1
-            
-        ### Update total basket value
-        # Special offers calculation
-        # A offers
-        if item == "A" and cnt>=3:
-            # 5A for 200
-            offer_mod = cnt%5
-            # if remainder less than 3 use just 5A for 200
-            if offer_mod < 3:
-                special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=5, discount=200)
-                total_basket_value+=special_offer_value
-            # if remainder more than 3 use both  5A for 200 and 3A for 130
-            elif offer_mod >= 3:
-                # 5A for 200
-                special_offer_value = offer_calculation(good_price=item_price, count=cnt-offer_mod, offer_count=5, discount=200)
-                total_basket_value+=special_offer_value
-                # 3A for 130
-                special_offer_value = offer_calculation(good_price=item_price, count=offer_mod, offer_count=3, discount=130)
-                total_basket_value+=special_offer_value
-
-            # 3A for 130
-            else:
-                special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=3, discount=130)
-                total_basket_value+=special_offer_value
-
-        # 2B for 45
-        elif item == "B" and cnt>=2:
-            special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=45)
-            total_basket_value+=special_offer_value
-
-        # 2E get one B free
-        elif item == "E" and cnt>=2:
-            # Add first total cost of E
-            total_basket_value+=(inventory["E"]*cnt)
     
-            # Check if B exists just to avoid ZeroDivision Errors
-            if basket["B"]:
-                # Free Bs
-                free_bs = math.floor(cnt/2)
-                count_b = basket["B"]
-                price_b = inventory["B"]
-                # Subtract initial B total cost and recalculate based on free_bs
-                initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=2, discount=45)
-                total_basket_value-=initial_cost_b
-
-                # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
-                if free_bs<count_b:
-                    new_b = count_b - free_bs
-                    new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=2, discount=45)
-                    total_basket_value+=new_cost_b
-
-        # 2F get one F free
-        elif item == "F" and cnt>=3:
-            special_offer_value = offer_calculation(good_price=item_price, count=cnt+1, offer_count=2, discount=10)
-            total_basket_value+=special_offer_value
-        
-        else:
-            total_basket_value+=(item_price*cnt)
-    """
     return total_basket_value
     
     
 if __name__ == "__main__":
     print(checkout(skus="AAABBCCCBEEFF"))
+
 
 
