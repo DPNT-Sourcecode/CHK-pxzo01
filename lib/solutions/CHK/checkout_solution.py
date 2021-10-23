@@ -1,7 +1,14 @@
 from collections import Counter
 import math
 import json
+import sys,os
 
+# Add parent dir to path
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
+print (os.getcwd())
 
 json_file_path = "inventory.json"
 with open(json_file_path) as f:
@@ -109,4 +116,5 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
 
