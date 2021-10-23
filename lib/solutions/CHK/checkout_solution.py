@@ -1,4 +1,5 @@
 from collections import Counter
+import math
 
 inventory = {"A":50, "B":30, "C":20, "D":15, "E":40}
 
@@ -72,11 +73,25 @@ def checkout(skus):
 
         # 2E get one B free
         elif item == "E" and cnt>=2:
-            remainder = (cnt % 2) * item_price
-            special_cnt = (cnt - (cnt % 2)) / 2
+            # Add first total cost of E
+            total_basket_value+=(inventory["E"]*cnt)
+    
+            # Check if B exists just to avoid ZeroDivision Errors
+            if basket["B"]:
+                # Free Bs
+                free_bs = math.floor(cnt/2)
+                count_b = basket["B"]
+                price_b = inventory["B"]
+                # Subtract initial B total cost and recalculate based on free_bs
+                initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=2, discount=45)
+                total_basket_value-=initial_cost_b
 
-            special_offer_value = (special_cnt*-30) + remainder
-            total_basket_value+=special_offer_value
+                # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
+                if free_bs<count_b:
+
+
+
+            
 
         else:
             total_basket_value+=(item_price*cnt)
