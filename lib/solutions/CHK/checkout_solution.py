@@ -1,7 +1,7 @@
 from collections import Counter
 import math
 import json
-import sys,os
+import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 inventory_file_path = os.path.join(dir_path, "inventory.json")
@@ -12,9 +12,6 @@ with open(inventory_file_path) as f:
 
 with open(offers_file_path) as f:
     offers = json.load(f)
-
-for offer in offers:
-    print(offer)
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
@@ -96,7 +93,6 @@ def offer_handler(basket_skus):
                         free_item_offers = [c["offers"] for c in offers if c["product"]==free_item]
                         if free_item_offers:
                             for offer in free_item_offers[0]:
-                                print("Free Item offers: " , offer)
                                 # Subtract initial B total cost and recalculate based on free_bs
                                 initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=offer["quantity"], discount=offer["price"])
                                 total_basket_value-=initial_cost_b
@@ -130,13 +126,14 @@ def checkout(skus):
     if not skus.isupper():
         return -1
 
-    total_basket_value=offer_handler(basket_skus=skus)
+    final_bill=offer_handler(basket_skus=skus)
     
-    return total_basket_value
+    return final_bill
     
     
 if __name__ == "__main__":
     print(checkout(skus="AAABBCCCBEEFF"))
+
 
 
 
