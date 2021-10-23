@@ -44,9 +44,11 @@ def offer_handler(basket_skus):
         if item_price==-1:
             return -1
         # check for any offers available
-        item_offers = [c["offers"] for offer in offers if offer["product"]==item]
-
-        print(item_offers)
+        item_offers = [c["offers"] for c in offers if c["product"]==item]
+        if item_offers:
+            print(item_offers[0])
+        else:
+            total_basket_value+=(item_price*cnt)
 
 
     return total_basket_value
@@ -141,5 +143,5 @@ def checkout(skus):
     return int(total_basket_value)
     
 if __name__ == "__main__":
-    print(checkout(skus="AAA"))
+    print(checkout(skus="CCC"))
 
