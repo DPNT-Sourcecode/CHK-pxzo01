@@ -9,7 +9,7 @@ offers_file_path = os.path.join(dir_path, "offers.json")
 
 with open(inventory_file_path) as f:
     inventory = json.load(f)
-#print(inventory)
+print(inventory)
 with open(offers_file_path) as f:
     offers = json.load(f)
 #print(offers)
@@ -24,13 +24,22 @@ def offer_calculation(good_price, count, offer_count, discount):
     count = int \n
     offer_count = int \n
     discount = int \n
-    special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free, 2F get one F free
+    e.g. special offers: 3A for 130, 5A for 200, 2B for 45, 2E get one B free, 2F get one F free
     """
     remainder = (count % offer_count) * good_price
     special_cnt = (count - (count % offer_count)) / offer_count
     offer_value = (special_cnt*discount) + remainder
 
     return offer_value
+
+def offer_handler(basket_skus):
+    total_basket_value=0
+
+    basket = Counter(basket_skus)
+    print(basket)
+
+    return total_basket_value
+
 
 def checkout(skus):
     """
@@ -47,6 +56,8 @@ def checkout(skus):
     if not skus.isupper():
         return -1
 
+
+    offer_handler(basket_skus=skus)
     total_basket_value=0
     # Count items in basket
     basket = Counter(skus)
@@ -118,3 +129,5 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+if __name__ == "__main__":
+    checkout(skus="AAA")
