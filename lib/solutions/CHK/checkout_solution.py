@@ -25,6 +25,7 @@ def checkout(skus):
     """
     # If invalid input return -1
     # Check for correct naming or empty basket
+    skus = skus.replace(" ", "")
     if not skus:
         return 0
     if not skus.isupper():
@@ -65,10 +66,13 @@ def checkout(skus):
 
         # 2B for 45
         elif item == "B" and cnt>=2:
-            remainder = (cnt % 2) * item_price
-            special_cnt = (cnt - (cnt % 2)) / 2
+            # remainder = (cnt % 2) * item_price
+            # special_cnt = (cnt - (cnt % 2)) / 2
 
-            special_offer_value = (special_cnt*45) + remainder
+            # special_offer_value = (special_cnt*45) + remainder
+            # total_basket_value+=special_offer_value
+
+            special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=45)
             total_basket_value+=special_offer_value
 
         # 2E get one B free
@@ -85,5 +89,6 @@ def checkout(skus):
     return int(total_basket_value)
     
 
-print(checkout(""))
+print(checkout("BB"))
+
 
