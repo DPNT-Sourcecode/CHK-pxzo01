@@ -1,0 +1,55 @@
+[
+    {
+        "id" :  1,
+        "type" : "discount",
+        "product" : "A",
+        "offers" : [
+            {
+                "name" : "3A for 130",
+                "quantity" : 3,
+                "price" : 130
+            },
+            {
+                "name" : "5A for 200",
+                "quantity" : 5,
+                "price" : 200
+            }
+        ]
+    },
+    {
+        "id" :  2,
+        "type" : "discount",
+        "product" : "B",
+        "offers" : [
+            {
+                "name" : "2B for 45",
+                "quantity" : 2,
+                "price" : 45
+            }
+        ]
+    },
+    {
+        "id" :  3,
+        "type" : "free",
+        "product" : "E",
+        "offers" : [
+            {
+                "name" : "2E get one B free",
+                "quantity" : 2,
+                "price" : "B"
+            }
+        ]
+    },
+    {
+        "id" :  4,
+        "type" : "free",
+        "product" : "F",
+        "offers" : [
+            {
+                "name" : "2F get one F free",
+                "quantity" : 2,
+                "price" : "F"
+            }
+        ]
+    }
+]
