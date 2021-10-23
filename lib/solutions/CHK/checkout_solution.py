@@ -108,7 +108,7 @@ def offer_handler(basket_skus):
                             new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=2, discount=45)
                             total_basket_value+=new_cost_b
                 else:
-                    special_offer_value = offer_calculation(good_price=item_price, count=cnt+1, offer_count=min_qt, discount=min_price)
+                    special_offer_value = offer_calculation(good_price=item_price, count=cnt+1, offer_count=min_qt, discount=inventory.get(item))
                     total_basket_value+=special_offer_value
         else:
             total_basket_value+=(item_price*cnt)
