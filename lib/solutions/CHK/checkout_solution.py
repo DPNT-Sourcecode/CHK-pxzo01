@@ -45,10 +45,11 @@ def offer_handler(basket_skus):
         if item_price==-1:
             return -1
         # check for any offers available
-        item_offers = [c["offers"] for c in offers if c["product"]==item]
+        item_offers = [c["offers"] for c in offers if c["product"]==item][0]
         if item_offers:
             #print(item_offers[0])
             offer_type = [c["type"] for c in offers if c["product"]==item][0]
+            print(item_offers)
             offer_quantities = [q["quantity"] for q in item_offers]
             print(offer_quantities)
             if offer_type=="discount":
@@ -169,6 +170,3 @@ def checkout(skus):
     
 if __name__ == "__main__":
     print(checkout(skus="AAA"))
-
-
-
