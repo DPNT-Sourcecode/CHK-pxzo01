@@ -85,8 +85,8 @@ def offer_handler(basket_skus):
                     special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=min_qt, discount=min_price)
                     total_basket_value+=special_offer_value
 
-        if offer_type=="free":
-            
+        elif offer_type=="free":
+            print(min_price)
             # Add first total cost of E
             total_basket_value+=(inventory["E"]*cnt)
     
@@ -200,6 +200,6 @@ def checkout(skus):
     return int(total_basket_value)
     
 if __name__ == "__main__":
-    print(checkout(skus="AAABBCCCB"))
+    print(checkout(skus="AAABBCCCBEE"))
 
 
