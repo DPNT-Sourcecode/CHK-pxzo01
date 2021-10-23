@@ -6,9 +6,9 @@ import sys,os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 json_file_path = os.path.join(dir_path, "inventory.json")
 with open(json_file_path) as f:
-    data = json.load(f)
+    inventory = json.load(f)
 
-print(data)
+print(type(inventory))
 
 def offer_calculation(good_price, count, offer_count, discount):
     """
@@ -110,6 +110,7 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
 
 
 
