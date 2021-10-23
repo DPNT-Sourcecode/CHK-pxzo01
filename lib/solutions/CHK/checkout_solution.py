@@ -8,9 +8,11 @@ def checkout(skus):
     special offers: 3A for 130, 2B for 45
     """
     # If invalid input return -1
-    # Check for correct naming
+    # Check for correct naming or empty basket
     if not skus.isupper():
         return -1
+    elif not skus:
+        return 0
 
     total_basket_value=0
     # Count items in basket
@@ -19,7 +21,7 @@ def checkout(skus):
     for item, cnt in basket.items():
         # Get price
         item_price = inventory.get(item, -1)
-        # check if good is in inventory, else return -1
+        # check if good is in inventory, else return -1 just in case
         if item_price==-1:
             return -1
             
@@ -44,4 +46,5 @@ def checkout(skus):
 
     return int(total_basket_value)
     
+
 
