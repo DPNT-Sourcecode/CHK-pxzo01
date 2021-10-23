@@ -60,7 +60,7 @@ def offer_handler(basket_skus):
             min_price = min(offer_prices)
 
             if offer_type=="discount":
-                if len(item_offers)>1:
+                if len(item_offers[0])>1:
                     # 5A for 200
                     offer_mod = cnt%max_qt
                     # if remainder less than 3 use just 5A for 200
@@ -80,6 +80,9 @@ def offer_handler(basket_skus):
                     else:
                         special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=min_price, discount=min_price)
                         total_basket_value+=special_offer_value
+                else:
+                    special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=min_price, discount=min_price)
+                    total_basket_value+=special_offer_value
 
         else:
             total_basket_value+=(item_price*cnt)
@@ -177,3 +180,4 @@ def checkout(skus):
     
 if __name__ == "__main__":
     print(checkout(skus="AAA"))
+
