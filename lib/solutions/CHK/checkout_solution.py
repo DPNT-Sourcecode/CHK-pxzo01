@@ -104,14 +104,14 @@ def offer_handler(basket_skus):
                             for offer in free_item_offers[0]:
                                 print("Free Item offers: " , offer)
                                 # Subtract initial B total cost and recalculate based on free_bs
-                                initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=2, discount=45)
+                                initial_cost_b = offer_calculation(good_price=price_b, count=count_b, offer_count=offer["quantity"], discount=offer["price"])
                                 total_basket_value-=initial_cost_b
 
-                        # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
-                        if free_bs<count_b:
-                            new_b = count_b - free_bs
-                            new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=2, discount=45)
-                            total_basket_value+=new_cost_b
+                            # If the number of free_bs is less than the number of existing Bs then recalculate with new number of Bs
+                            if free_bs<count_b:
+                                new_b = count_b - free_bs
+                                new_cost_b = offer_calculation(good_price=price_b, count=new_b, offer_count=offer["quantity"], discount=offer["price"])
+                                total_basket_value+=new_cost_b
                 else:
                     special_offer_value = offer_calculation(good_price=item_price, count=cnt+1, offer_count=min_qt, discount=inventory.get(item))
                     total_basket_value+=special_offer_value
@@ -138,7 +138,8 @@ def checkout(skus):
         return -1
 
 
-    offer_handler(basket_skus=skus)
+    total_basket_value=offer_handler(basket_skus=skus)
+    """
     total_basket_value=0
     # Count items in basket
     basket = Counter(skus)
@@ -206,10 +207,11 @@ def checkout(skus):
         
         else:
             total_basket_value+=(item_price*cnt)
-
-    return int(total_basket_value)
+    """
+    return total_basket_value
+    
     
 if __name__ == "__main__":
-    print(checkout(skus="AAABBCCCBEE"))
+    print(checkout(skus="AAABBCCCBEEFF"))
 
 
