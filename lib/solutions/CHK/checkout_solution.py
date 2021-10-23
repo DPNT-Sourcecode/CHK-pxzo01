@@ -34,7 +34,6 @@ def checkout(skus):
     total_basket_value=0
     # Count items in basket
     basket = Counter(skus)
-
     for item, cnt in basket.items():
         # Get price
         item_price = inventory.get(item, -1)
@@ -73,4 +72,4 @@ def checkout(skus):
     return int(total_basket_value)
     
 
-print(checkout("AAAAABBB"))
+print(checkout("AAAAA AAAA"))
