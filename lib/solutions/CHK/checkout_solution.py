@@ -94,7 +94,7 @@ def checkout(skus):
 
         # 2F get one F free
         elif item == "F" and cnt>=3:
-            special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=20)
+            special_offer_value = offer_calculation(good_price=item_price, count=cnt, offer_count=2, discount=10)
             total_basket_value+=special_offer_value
         
         else:
@@ -104,8 +104,4 @@ def checkout(skus):
     
 
 
-print(checkout("FFF"))
-
-
-
-
+print(checkout("FFFFF"))
