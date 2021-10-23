@@ -16,7 +16,8 @@ def checkout(skus):
         item_price = inventory.get(item, -1)
         if item_price==-1:
             cnt=1
-        # update total basket value
+            
+        ### Update total basket value
         # add special offers calculation
         if item == "A" and cnt>=3:
             remainder = (cnt % 3) * item_price
@@ -37,5 +38,3 @@ def checkout(skus):
 
     return int(total_basket_value)
     
-
-print(checkout("aabbcdd12"))
